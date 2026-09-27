@@ -14,10 +14,11 @@ OUT_DIR = "/kaggle/working/outputs"
 subprocess.run([sys.executable, "-m", "pip", "install", "-q", "polars", "pyarrow", "bm25s",
                 "sparse_dot_topn", "jellyfish", "unidecode", "rapidfuzz", "lightgbm"], check=False)
 
-code_dir = "/kaggle/working/code"
+WORK = os.environ.get("KAGGLE_WORK", "/kaggle/working")
 with urllib.request.urlopen(f"https://codeload.github.com/{REPO}/tar.gz/{COMMIT}") as r:
-    tarfile.open(fileobj=io.BytesIO(r.read()), mode="r:gz").extractall("/kaggle/tmp_code")
-os.rename(glob.glob("/kaggle/tmp_code/*")[0], code_dir)
+    tar = tarfile.open(fileobj=io.BytesIO(r.read()), mode="r:gz")
+    code_dir = os.path.join(WORK, tar.getnames()[0].split("/")[0])
+    tar.extractall(WORK)
 sys.path.insert(0, code_dir)
 
 if not os.path.exists(os.path.join(DATA_DIR, "train_source1.tsv")):
