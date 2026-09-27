@@ -61,3 +61,5 @@ Model artifacts
 *.pkl
 *.joblib
 *.onnx
+# written by colab_full_run.ipynb when run locally
+notebooks/src/
