@@ -7,7 +7,7 @@ import glob, io, logging, os, subprocess, sys, tarfile, time, urllib.request
 
 REPO = "Navn2025/bias_and_prejudice"
 COMMIT = "00bcac3"
-MAX_DF_RATIO = None          # e.g. 0.3 if India BM25 is too slow for the 12-hour limit
+MAX_DF_RATIO = 0.3           # India BM25 was too slow for the 12-hour limit at exact scores
 DATA_DIR = "/kaggle/input/amazon-ml"
 OUT_DIR = "/kaggle/working/outputs"
 
